@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVL Tree Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AVL Tree Visualizer</h1>
+            <p>Insert, delete, find, and replace nodes with automatic balancing</p>
+        </header>
+
+        <div class="controls">
+            <div class="input-group">
+                <input type="number" id="nodeValue" placeholder="Enter a number" min="0" max="999">
+                <button id="insertBtn">Insert</button>
+                <button id="deleteBtn">Delete</button>
+                <button id="findBtn">Find</button>
+                <button id="replaceBtn">Replace</button>
+            </div>
+            
+            <div class="replace-group" id="replaceGroup" style="display: none;">
+                <input type="number" id="replaceValue" placeholder="New value" min="0" max="999">
+                <button id="confirmReplaceBtn">Confirm Replace</button>
+                <button id="cancelReplaceBtn">Cancel</button>
+            </div>
+
+            <div class="action-buttons">
+                <button id="undoBtn" disabled>Undo Last Operation</button>
+                <button id="clearBtn">Clear Tree</button>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <div class="info-item">
+                <span>Status:</span>
+                <span id="status">Ready</span>
+            </div>
+            <div class="info-item">
+                <span>Operations:</span>
+                <span id="operationCount">0</span>
+            </div>
+        </div>
+
+        <div class="canvas-container">
+            <svg id="treeCanvas" width="100%" height="600"></svg>
+        </div>
+
+        <div class="history-panel">
+            <h3>Operation History <span class="help-text">(Click any item for explanation)</span></h3>
+            <div id="historyList"></div>
+        </div>
+
+        <!-- Explanation Modal -->
+        <div id="explanationModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2 id="explanationTitle">Operation Explanation</h2>
+                <div id="explanationContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="avl-tree.js"></script>
+    <script src="visualizer.js"></script>
+    <script src="tree-diagram.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
