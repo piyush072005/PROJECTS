@@ -1,0 +1,6 @@
+# Discord Bot Token Configuration
+# Copy this file to .env and add your bot token
+# Get your token from https://discord.com/developers/applications
+
+DISCORD_BOT_TOKEN=your_bot_token_here
+
