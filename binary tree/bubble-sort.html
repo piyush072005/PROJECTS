@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bubble Sort Visualizer | Algo Playground</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body data-algorithm="bubble">
+    <header class="site-nav">
+      <a class="site-nav__brand" href="index.html">Algo Playground</a>
+      <nav class="site-nav__links">
+        <a href="index.html">Home</a>
+        <a href="tree.html">Binary Tree</a>
+        <a href="avl-tree.html">AVL Tree</a>
+        <a href="quick-sort.html">Quick Sort</a>
+        <a href="bubble-sort.html" class="active">Bubble Sort</a>
+        <a href="merge-sort.html">Merge Sort</a>
+        <a href="heap-sort.html">Heap Sort</a>
+        <a href="selection-sort.html">Selection Sort</a>
+        <a href="binary-search.html">Binary Search</a>
+        <a href="linear-search.html">Linear Search</a>
+      </nav>
+    </header>
+
+    <header class="hero hero--tight">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Sorting Lab</p>
+        <h1>Bubble Sort</h1>
+        <p class="hero__subtitle">
+          Watch adjacent comparisons float the largest value to the top through
+          repeated passes.
+        </p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="panel">
+        <form id="sort-form" class="order-form">
+          <div class="order-form__header">
+            <h2>Dataset</h2>
+            <p>Comma or space separated numbers.</p>
+          </div>
+          <label class="field">
+            <span>Numbers</span>
+            <textarea
+              id="numbers-input"
+              placeholder="8, 5, 2, 9, 1, 6"
+            ></textarea>
+          </label>
+          <div class="order-form__actions">
+            <button type="submit">Run Bubble Sort</button>
+            <button type="button" id="random-btn" class="ghost">
+              Random Data
+            </button>
+          </div>
+          <p class="order-form__hint">
+            Handy for showing why already sorted inputs finish early.
+          </p>
+        </form>
+
+        <div id="sort-status" class="status-message" role="status"></div>
+
+        <div class="result-card" id="sort-summary" hidden>
+          <h3>Sorted Output</h3>
+          <p id="sorted-values"></p>
+          <div class="result-grid">
+            <div>
+              <strong>Comparisons</strong>
+              <p id="comparison-count">0</p>
+            </div>
+            <div>
+              <strong>Swaps</strong>
+              <p id="swap-count">0</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel dual-panel">
+        <div class="panel__header">
+          <h2>Step-by-step reasoning</h2>
+          <p>Trace each adjacent comparison and swap event.</p>
+        </div>
+        <ol class="list-steps" id="sort-steps">
+          <li class="placeholder">Run the algorithm to populate steps.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Algo Playground • Experiment with multiple algorithms from the nav.</p>
+    </footer>
+
+    <script src="scripts/sort-page.js" defer></script>
+  </body>
+</html>
+

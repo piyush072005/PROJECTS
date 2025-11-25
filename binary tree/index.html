@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Binary Tree Builder</title>
+    <title>Algo Playground | Traversals, Sorting & Searching</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,101 +13,79 @@
     />
   </head>
   <body>
+    <header class="site-nav">
+      <a class="site-nav__brand" href="index.html">Algo Playground</a>
+      <nav class="site-nav__links">
+        <a href="index.html" class="active">Home</a>
+        <a href="tree.html">Binary Tree</a>
+        <a href="avl-tree.html">AVL Tree</a>
+        <a href="quick-sort.html">Quick Sort</a>
+        <a href="bubble-sort.html">Bubble Sort</a>
+        <a href="merge-sort.html">Merge Sort</a>
+        <a href="heap-sort.html">Heap Sort</a>
+        <a href="selection-sort.html">Selection Sort</a>
+        <a href="binary-search.html">Binary Search</a>
+        <a href="linear-search.html">Linear Search</a>
+      </nav>
+    </header>
+
     <header class="hero">
       <div class="hero__content">
-        <p class="hero__eyebrow">Binary Tree Playground</p>
-        <h1>Build a Binary Tree from Traversals</h1>
+        <p class="hero__eyebrow">Interactive Algorithms Suite</p>
+        <h1>Visualize Trees, Sorting, and Searching</h1>
         <p class="hero__subtitle">
-          Provide any two traversals (inorder, preorder, postorder) and we will
-          reconstruct the tree, visualize it, and generate the missing traversal
-          alongside an explanation of the structure.
+          Jump into any topic using the navigation bar or start from the cards
+          below. Every page offers inputs, visual feedback, and textual
+          explanations tailored to the algorithm.
         </p>
       </div>
     </header>
 
-    <main class="main">
-      <section class="panel">
-        <form id="order-form" class="order-form">
-          <div class="order-form__header">
-            <h2>Enter Traversal Orders</h2>
-            <p>Separate values with commas or spaces.</p>
-          </div>
-          <div class="order-form__grid">
-            <label class="field">
-              <span>Inorder</span>
-              <textarea
-                id="inorder-input"
-                placeholder="e.g. D, B, E, A, F, C"
-              ></textarea>
-            </label>
-
-            <label class="field">
-              <span>Preorder</span>
-              <textarea
-                id="preorder-input"
-                placeholder="e.g. A, B, D, E, C, F"
-              ></textarea>
-            </label>
-
-            <label class="field">
-              <span>Postorder</span>
-              <textarea
-                id="postorder-input"
-                placeholder="e.g. D, E, B, F, C, A"
-              ></textarea>
-            </label>
-          </div>
-
-          <div class="order-form__actions">
-            <button type="submit">Build Tree</button>
-            <button type="button" id="reset-btn" class="ghost">
-              Reset
-            </button>
-          </div>
-          <p class="order-form__hint">
-            Exactly two fields must be filled. Traversals should have unique
-            node labels (letters, words, or numbers).
+    <main class="main main--grid">
+      <section class="panel feature-panel">
+        <div class="panel__header">
+          <h2>Structure & Traversals</h2>
+          <p>Work with binary trees reconstructed from two traversals.</p>
+        </div>
+        <div class="feature-panel__body">
+          <p>
+            Provide any two orders (inorder, preorder, postorder) to rebuild the
+            tree, draw it, and generate the missing traversal with a structural
+            explanation.
           </p>
-        </form>
-
-        <div id="status-message" class="status-message" role="status"></div>
-
-        <div class="result-card" id="missing-order-card" hidden>
-          <h3 id="missing-order-title"></h3>
-          <p id="missing-order-values"></p>
+          <a class="chip-link" href="tree.html">Open Binary Tree Builder →</a>
         </div>
       </section>
 
-      <section class="panel visual-panel">
+      <section class="panel feature-panel">
         <div class="panel__header">
-          <h2>Tree Visualizer</h2>
-          <p>Nodes are laid out using an inorder-based spacing for readability.</p>
+          <h2>Sorting Lab</h2>
+          <p>Compare and learn five popular sorting techniques.</p>
         </div>
-        <div id="tree-visual" class="tree-visual" aria-live="polite">
-          <p class="placeholder">Build a tree to see the visualization.</p>
+        <div class="feature-panel__body feature-panel__body--grid">
+          <a class="chip-link" href="quick-sort.html">Quick Sort</a>
+          <a class="chip-link" href="bubble-sort.html">Bubble Sort</a>
+          <a class="chip-link" href="merge-sort.html">Merge Sort</a>
+          <a class="chip-link" href="heap-sort.html">Heap Sort</a>
+          <a class="chip-link" href="selection-sort.html">Selection Sort</a>
         </div>
       </section>
 
-      <section class="panel explanation-panel">
+      <section class="panel feature-panel">
         <div class="panel__header">
-          <h2>Tree Explanation</h2>
-          <p>Understand how the nodes connect in the reconstructed tree.</p>
+          <h2>Searching Studio</h2>
+          <p>See how linear and binary search traverse an array.</p>
         </div>
-        <div id="tree-explanation" class="tree-explanation">
-          <p class="placeholder">
-            Once the tree is created, a structural walkthrough appears here.
-          </p>
+        <div class="feature-panel__body feature-panel__body--grid">
+          <a class="chip-link" href="binary-search.html">Binary Search</a>
+          <a class="chip-link" href="linear-search.html">Linear Search</a>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <p>
-        Built with vanilla HTML/CSS/JS • Works best with distinct node labels.
-      </p>
+      <p>Algo Playground • Built with vanilla HTML/CSS/JS.</p>
     </footer>
-
-    <script src="script.js"></script>
   </body>
 </html>
 

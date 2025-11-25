@@ -398,9 +398,13 @@ function explainTree(root, missingOrder, traversals) {
       : '';
 
   treeExplanation.innerHTML = `
-    <p class="explain-intro">Tree recreated from the provided ${missingOrder === 'inorder' ? 'preorder & postorder' : 'traversal pair'}.</p>
+    <p class="explain-intro">Tree recreated from the provided ${
+      missingOrder === 'inorder' ? 'preorder & postorder' : 'traversal pair'
+    }.</p>
     <p class="explain-root">Root node: <strong>${root.value}</strong></p>
-    <p class="explain-order">Computed ${missingOrder} traversal: <strong>${traversals[missingOrder].join(', ')}</strong></p>
+    <p class="explain-order">Computed ${missingOrder} traversal: <strong>${traversals[
+      missingOrder
+    ].join(', ')}</strong></p>
     ${note}
     <ul class="node-list">${listItems}</ul>
   `;
