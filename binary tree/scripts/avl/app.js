@@ -475,3 +475,5 @@ function showExplanation(operation) {
   explanationModal.style.display = 'block';
 }
 
+
+
