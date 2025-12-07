@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dijkstra's Algorithm Visualizer | Algo Playground</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body data-algorithm="dijkstra">
+    <header class="site-nav">
+      <a class="site-nav__brand" href="index.html">Algo Playground</a>
+      <nav class="site-nav__links">
+        <a href="index.html">Home</a>
+        <a href="tree.html">Binary Tree</a>
+        <a href="avl-tree.html">AVL Tree</a>
+        <a href="quick-sort.html">Quick Sort</a>
+        <a href="bubble-sort.html">Bubble Sort</a>
+        <a href="merge-sort.html">Merge Sort</a>
+        <a href="heap-sort.html">Heap Sort</a>
+        <a href="selection-sort.html">Selection Sort</a>
+        <a href="binary-search.html">Binary Search</a>
+        <a href="linear-search.html">Linear Search</a>
+        <a href="prim.html">Prim's</a>
+        <a href="kruskal.html">Kruskal's</a>
+        <a href="dijkstra.html" class="active">Dijkstra's</a>
+        <a href="floyd-warshall.html">Floyd-Warshall</a>
+      </nav>
+    </header>
+
+    <header class="hero hero--tight">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Graph Algorithms</p>
+        <h1>Dijkstra's Algorithm</h1>
+        <p class="hero__subtitle">
+          Find shortest paths from a source node to all other nodes using a greedy approach.
+          Works with non-negative edge weights.
+        </p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="panel search-panel">
+        <form id="graph-form" class="order-form">
+          <div class="order-form__header">
+            <h2>Input Graph</h2>
+            <p>Enter edges as: from to weight (one per line)</p>
+          </div>
+          <label class="field">
+            <span>Edges</span>
+            <textarea
+              id="graph-input"
+              placeholder="A B 4&#10;A C 2&#10;B C 1&#10;B D 5&#10;C D 8&#10;C E 10&#10;D E 2"
+            ></textarea>
+          </label>
+          <div class="search-target">
+            <label class="field">
+              <span>Source Node</span>
+              <input id="source-input" placeholder="e.g. A" />
+            </label>
+          </div>
+          <div class="order-form__actions">
+            <button type="submit">Run Dijkstra's Algorithm</button>
+            <button type="button" id="random-btn" class="ghost">
+              Example Graph
+            </button>
+          </div>
+          <p class="order-form__hint">
+            Each line represents an edge: source destination weight. Enter the starting node for shortest paths.
+          </p>
+        </form>
+
+        <div id="graph-status" class="status-message" role="status"></div>
+
+        <div class="result-card" id="graph-summary" hidden>
+          <h3>Result</h3>
+          <p id="graph-result"></p>
+          <div id="graph-paths" style="margin-top: 1rem;"></div>
+        </div>
+      </section>
+
+      <section class="panel dual-panel">
+        <div class="panel__header">
+          <h2>Trace</h2>
+          <p>Step-by-step execution showing node visits and distance updates.</p>
+        </div>
+        <ol class="list-steps" id="graph-steps">
+          <li class="placeholder">Run the algorithm to populate steps.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Algo Playground • Experiment with multiple algorithms from the nav.</p>
+    </footer>
+
+    <script src="scripts/graph-algorithms.js"></script>
+    <script>
+      const form = document.getElementById('graph-form');
+      const graphInput = document.getElementById('graph-input');
+      const sourceInput = document.getElementById('source-input');
+      const statusBox = document.getElementById('graph-status');
+      const summaryCard = document.getElementById('graph-summary');
+      const resultText = document.getElementById('graph-result');
+      const pathsContainer = document.getElementById('graph-paths');
+      const stepsContainer = document.getElementById('graph-steps');
+      const randomBtn = document.getElementById('random-btn');
+
+      if (form) {
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          
+          const { nodes, edges } = parseGraphInput(graphInput.value);
+          
+          if (nodes.length === 0 || edges.length === 0) {
+            showGraphStatus('Please enter at least one edge in the format: from to weight', true);
+            return;
+          }
+
+          const source = sourceInput.value.trim();
+          if (!source || !nodes.includes(source)) {
+            showGraphStatus(`Please enter a valid source node. Available nodes: ${nodes.join(', ')}`, true);
+            return;
+          }
+
+          const outcome = runDijkstrasAlgorithm(nodes, edges, source);
+          
+          summaryCard.hidden = false;
+          resultText.textContent = `Shortest paths from ${source} to all nodes:`;
+          
+          // Display paths
+          pathsContainer.innerHTML = '';
+          for (const node of nodes.sort()) {
+            const pathInfo = outcome.paths[node];
+            const div = document.createElement('div');
+            div.style.marginBottom = '0.5rem';
+            div.style.padding = '0.5rem';
+            div.style.background = '#f8fafc';
+            div.style.borderRadius = '8px';
+            
+            if (pathInfo.path) {
+              div.innerHTML = `<strong>${source} → ${node}:</strong> ` +
+                `Distance = ${pathInfo.distance}, ` +
+                `Path = ${pathInfo.path.join(' → ')}`;
+            } else {
+              div.innerHTML = `<strong>${source} → ${node}:</strong> No path exists (∞)`;
+            }
+            pathsContainer.appendChild(div);
+          }
+          
+          populateGraphSteps(outcome.steps);
+          showGraphStatus('Dijkstra\'s algorithm completed.', false);
+        });
+      }
+
+      if (randomBtn) {
+        randomBtn.addEventListener('click', () => {
+          graphInput.value = 'A B 4\nA C 2\nB C 1\nB D 5\nC D 8\nC E 10\nD E 2';
+          sourceInput.value = 'A';
+          summaryCard.hidden = true;
+          stepsContainer.innerHTML = '<li class="placeholder">Run the algorithm to populate steps.</li>';
+          showGraphStatus('Example graph loaded.', false);
+        });
+      }
+    </script>
+  </body>
+</html>
+

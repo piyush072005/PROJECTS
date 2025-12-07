@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Floyd-Warshall Algorithm Visualizer | Algo Playground</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body data-algorithm="floyd-warshall">
+    <header class="site-nav">
+      <a class="site-nav__brand" href="index.html">Algo Playground</a>
+      <nav class="site-nav__links">
+        <a href="index.html">Home</a>
+        <a href="tree.html">Binary Tree</a>
+        <a href="avl-tree.html">AVL Tree</a>
+        <a href="quick-sort.html">Quick Sort</a>
+        <a href="bubble-sort.html">Bubble Sort</a>
+        <a href="merge-sort.html">Merge Sort</a>
+        <a href="heap-sort.html">Heap Sort</a>
+        <a href="selection-sort.html">Selection Sort</a>
+        <a href="binary-search.html">Binary Search</a>
+        <a href="linear-search.html">Linear Search</a>
+        <a href="prim.html">Prim's</a>
+        <a href="kruskal.html">Kruskal's</a>
+        <a href="dijkstra.html">Dijkstra's</a>
+        <a href="floyd-warshall.html" class="active">Floyd-Warshall</a>
+      </nav>
+    </header>
+
+    <header class="hero hero--tight">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Graph Algorithms</p>
+        <h1>Floyd-Warshall Algorithm</h1>
+        <p class="hero__subtitle">
+          Find shortest paths between all pairs of nodes using dynamic programming.
+          Handles negative edge weights (but not negative cycles).
+        </p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="panel search-panel">
+        <form id="graph-form" class="order-form">
+          <div class="order-form__header">
+            <h2>Input Adjacency Matrix</h2>
+            <p>Enter the number of nodes and the adjacency matrix (use ∞ or inf for no edge)</p>
+          </div>
+          <div class="search-target">
+            <label class="field">
+              <span>Number of Nodes</span>
+              <input id="node-count-input" type="number" min="2" max="10" placeholder="e.g. 4" value="4" />
+            </label>
+          </div>
+          <label class="field">
+            <span>Adjacency Matrix (one row per line)</span>
+            <textarea
+              id="matrix-input"
+              placeholder="0 3 ∞ 5&#10;2 0 ∞ 4&#10;∞ 1 0 ∞&#10;∞ ∞ 2 0"
+            ></textarea>
+          </label>
+          <div class="order-form__actions">
+            <button type="submit">Run Floyd-Warshall Algorithm</button>
+            <button type="button" id="random-btn" class="ghost">
+              Example Matrix
+            </button>
+          </div>
+          <p class="order-form__hint">
+            Enter numbers separated by spaces. Use ∞ or inf for infinity (no direct edge).
+          </p>
+        </form>
+
+        <div id="graph-status" class="status-message" role="status"></div>
+
+        <div class="result-card" id="graph-summary" hidden>
+          <h3>Result</h3>
+          <p id="graph-result"></p>
+          <div id="graph-matrix" style="margin-top: 1rem; font-family: monospace; white-space: pre-wrap; background: #f8fafc; padding: 1rem; border-radius: 8px;"></div>
+        </div>
+      </section>
+
+      <section class="panel dual-panel">
+        <div class="panel__header">
+          <h2>Trace</h2>
+          <p>Step-by-step execution showing distance matrix updates at each iteration.</p>
+        </div>
+        <ol class="list-steps" id="graph-steps">
+          <li class="placeholder">Run the algorithm to populate steps.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Algo Playground • Experiment with multiple algorithms from the nav.</p>
+    </footer>
+
+    <script src="scripts/graph-algorithms.js"></script>
+    <script>
+      const form = document.getElementById('graph-form');
+      const nodeCountInput = document.getElementById('node-count-input');
+      const matrixInput = document.getElementById('matrix-input');
+      const statusBox = document.getElementById('graph-status');
+      const summaryCard = document.getElementById('graph-summary');
+      const resultText = document.getElementById('graph-result');
+      const matrixContainer = document.getElementById('graph-matrix');
+      const stepsContainer = document.getElementById('graph-steps');
+      const randomBtn = document.getElementById('random-btn');
+
+      if (form) {
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          
+          const nodeCount = parseInt(nodeCountInput.value);
+          if (isNaN(nodeCount) || nodeCount < 2 || nodeCount > 10) {
+            showGraphStatus('Please enter a valid number of nodes (2-10)', true);
+            return;
+          }
+
+          const { nodes, matrix } = parseAdjacencyMatrix(matrixInput.value, nodeCount);
+          
+          if (matrix.length !== nodeCount) {
+            showGraphStatus(`Please enter ${nodeCount} rows in the matrix`, true);
+            return;
+          }
+
+          const outcome = runFloydWarshall(nodes, matrix);
+          
+          summaryCard.hidden = false;
+          resultText.textContent = `All-pairs shortest paths computed for ${nodeCount} nodes.`;
+          matrixContainer.textContent = formatMatrix(outcome.dist, nodes);
+          
+          populateGraphSteps(outcome.steps);
+          showGraphStatus('Floyd-Warshall algorithm completed.', false);
+        });
+      }
+
+      if (randomBtn) {
+        randomBtn.addEventListener('click', () => {
+          nodeCountInput.value = '4';
+          matrixInput.value = '0 3 inf 5\n2 0 inf 4\ninf 1 0 inf\ninf inf 2 0';
+          summaryCard.hidden = true;
+          stepsContainer.innerHTML = '<li class="placeholder">Run the algorithm to populate steps.</li>';
+          showGraphStatus('Example matrix loaded.', false);
+        });
+      }
+    </script>
+  </body>
+</html>
+
