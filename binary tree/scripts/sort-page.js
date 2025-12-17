@@ -1,18 +1,23 @@
 const sortAlgorithms = {
   quick: {
     run: quickSortWithSteps,
+    generateFrames: () => window.generateQuickSortFrames,
   },
   bubble: {
     run: bubbleSortWithSteps,
+    generateFrames: () => window.generateBubbleSortFrames,
   },
   merge: {
     run: mergeSortWithSteps,
+    generateFrames: () => window.generateMergeSortFrames,
   },
   heap: {
     run: heapSortWithSteps,
+    generateFrames: () => window.generateHeapSortFrames,
   },
   selection: {
     run: selectionSortWithSteps,
+    generateFrames: () => window.generateSelectionSortFrames,
   },
 };
 
@@ -26,6 +31,22 @@ const swapCount = document.getElementById('swap-count');
 const stepsList = document.getElementById('sort-steps');
 const randomBtn = document.getElementById('random-btn');
 const algorithmKey = document.body.dataset.algorithm;
+
+// Initialize visualizer
+let visualizer = null;
+
+function initVisualizer() {
+  if (window.AlgorithmVisualizer && document.getElementById('visualizer-panel')) {
+    visualizer = new AlgorithmVisualizer('visualizer-panel');
+  }
+}
+
+// Try to init on load, retry if script not loaded yet
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initVisualizer);
+} else {
+  setTimeout(initVisualizer, 100);
+}
 
 if (sortForm && sortAlgorithms[algorithmKey]) {
   sortForm.addEventListener('submit', (event) => {
@@ -46,13 +67,32 @@ if (sortForm && sortAlgorithms[algorithmKey]) {
     swapCount.textContent = swaps;
     populateSteps(steps);
     showSortStatus('Sort completed successfully.', false);
+    
+    // Generate and display animation frames
+    if (visualizer && sortAlgorithms[algorithmKey].generateFrames) {
+      const frameGenerator = sortAlgorithms[algorithmKey].generateFrames();
+      if (frameGenerator) {
+        const frames = frameGenerator(dataset);
+        visualizer.setFrames(frames);
+      }
+    } else {
+      // Retry initializing visualizer
+      initVisualizer();
+      if (visualizer && sortAlgorithms[algorithmKey].generateFrames) {
+        const frameGenerator = sortAlgorithms[algorithmKey].generateFrames();
+        if (frameGenerator) {
+          const frames = frameGenerator(dataset);
+          visualizer.setFrames(frames);
+        }
+      }
+    }
   });
 }
 
 if (randomBtn) {
   randomBtn.addEventListener('click', () => {
     const randomValues = Array.from(
-      { length: 7 },
+      { length: 8 },
       () => Math.floor(Math.random() * 90) + 10
     );
     numbersInput.value = randomValues.join(', ');
@@ -60,6 +100,11 @@ if (randomBtn) {
     stepsList.innerHTML =
       '<li class="placeholder">Run the algorithm to populate steps.</li>';
     showSortStatus('Random dataset generated.', false);
+    
+    // Reset visualizer
+    if (visualizer) {
+      visualizer.reset();
+    }
   });
 }
 
