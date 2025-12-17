@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Algorithm Comparison | Algo Playground</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%234338ca%22 rx=%2215%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22monospace%22>&lt;/&gt;</text></svg>" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-nav">
+      <a class="site-nav__brand" href="index.html">Algo Playground</a>
+      <nav class="site-nav__links">
+        <a href="index.html">Home</a>
+        <a href="searching.html">Searching</a>
+        <a href="sorting.html">Sorting</a>
+        <a href="treebuilder.html">Tree Builder</a>
+        <a href="graph.html">Graphs</a>
+        <a href="compare.html" class="active">Compare</a>
+      </nav>
+    </header>
+
+    <header class="hero hero--tight">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Performance Lab</p>
+        <h1>Algorithm Comparison</h1>
+        <p class="hero__subtitle">
+          Compare sorting algorithms side by side. Analyze time complexity,
+          benchmark real performance, and visualize how they scale.
+        </p>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="compare-grid">
+        <!-- Complexity Table -->
+        <section class="panel full-width">
+          <div class="panel__header">
+            <h2>📊 Complexity Overview</h2>
+            <p>Time and space complexity for each sorting algorithm.</p>
+          </div>
+          <div id="complexity-table-container"></div>
+        </section>
+
+        <!-- Performance Chart -->
+        <section class="panel full-width">
+          <div class="panel__header">
+            <h2>⚡ Performance Benchmark</h2>
+            <p>Real runtime comparison at different array sizes.</p>
+          </div>
+          
+          <div class="algo-selector" id="algo-selector">
+            <label class="algo-checkbox">
+              <input type="checkbox" value="quick" checked>
+              <span>Quick Sort</span>
+            </label>
+            <label class="algo-checkbox">
+              <input type="checkbox" value="merge" checked>
+              <span>Merge Sort</span>
+            </label>
+            <label class="algo-checkbox">
+              <input type="checkbox" value="heap" checked>
+              <span>Heap Sort</span>
+            </label>
+            <label class="algo-checkbox">
+              <input type="checkbox" value="bubble">
+              <span>Bubble Sort</span>
+            </label>
+            <label class="algo-checkbox">
+              <input type="checkbox" value="selection">
+              <span>Selection Sort</span>
+            </label>
+          </div>
+          
+          <div class="benchmark-controls">
+            <div class="field">
+              <label>Array sizes to test</label>
+              <input type="text" id="compare-sizes" value="100, 500, 1000, 2000" placeholder="100, 500, 1000">
+            </div>
+            <button id="run-comparison">Run Comparison</button>
+          </div>
+          
+          <div class="chart-container" id="comparison-chart">
+            <h4>Runtime Comparison</h4>
+            <p style="color: var(--text-muted); font-style: italic; text-align: center; padding: 2rem;">
+              Select algorithms and click "Run Comparison" to generate chart.
+            </p>
+          </div>
+        </section>
+
+        <!-- Big-O Explanation -->
+        <section class="panel">
+          <div class="panel__header">
+            <h2>📚 Understanding Big-O</h2>
+          </div>
+          <div class="feature-panel__body">
+            <div class="complexity-card" style="text-align: left;">
+              <p><span class="complexity-badge o-1">O(1)</span> <strong>Constant</strong> - Same time regardless of input size</p>
+            </div>
+            <div class="complexity-card" style="text-align: left; margin-top: 0.5rem;">
+              <p><span class="complexity-badge o-logn">O(log n)</span> <strong>Logarithmic</strong> - Halves problem each step (Binary Search)</p>
+            </div>
+            <div class="complexity-card" style="text-align: left; margin-top: 0.5rem;">
+              <p><span class="complexity-badge o-n">O(n)</span> <strong>Linear</strong> - Grows proportionally with input</p>
+            </div>
+            <div class="complexity-card" style="text-align: left; margin-top: 0.5rem;">
+              <p><span class="complexity-badge o-nlogn">O(n log n)</span> <strong>Linearithmic</strong> - Optimal for comparison sorts</p>
+            </div>
+            <div class="complexity-card" style="text-align: left; margin-top: 0.5rem;">
+              <p><span class="complexity-badge o-n2">O(n²)</span> <strong>Quadratic</strong> - Nested loops, slow for large inputs</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Recommendations -->
+        <section class="panel">
+          <div class="panel__header">
+            <h2>💡 When to Use What?</h2>
+          </div>
+          <div class="feature-panel__body">
+            <div class="result-card" style="margin-top: 0;">
+              <h3 style="color: #6366f1;">Quick Sort</h3>
+              <p>Best general-purpose sort. Fast in practice, but avoid for nearly-sorted data or when stability matters.</p>
+            </div>
+            <div class="result-card">
+              <h3 style="color: #10b981;">Merge Sort</h3>
+              <p>Guaranteed O(n log n). Use when you need stability or consistent performance. Good for linked lists.</p>
+            </div>
+            <div class="result-card">
+              <h3 style="color: #8b5cf6;">Heap Sort</h3>
+              <p>In-place with O(n log n) worst case. Good when memory is limited and you need guaranteed performance.</p>
+            </div>
+            <div class="result-card">
+              <h3 style="color: #f59e0b;">Bubble Sort</h3>
+              <p>Only use for teaching or tiny arrays (< 20 elements). Can be fast if data is nearly sorted.</p>
+            </div>
+            <div class="result-card">
+              <h3 style="color: #ef4444;">Selection Sort</h3>
+              <p>Minimizes swaps (O(n) swaps). Use only when writes are expensive and array is small.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Scaling Visualization -->
+        <section class="panel full-width">
+          <div class="panel__header">
+            <h2>📈 How Complexity Scales</h2>
+            <p>Visual comparison of growth rates for different Big-O classes.</p>
+          </div>
+          <div id="scaling-visualization"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>Algo Playground • Compare and learn algorithm efficiency.</p>
+    </footer>
+
+    <script src="scripts/complexity-analyzer.js" defer></script>
+    <script src="scripts/utilities.js" defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Render complexity table
+        const tableContainer = document.getElementById('complexity-table-container');
+        if (tableContainer && window.createComparisonTable) {
+          tableContainer.innerHTML = createComparisonTable();
+        }
+        
+        // Render scaling visualization
+        const scalingContainer = document.getElementById('scaling-visualization');
+        if (scalingContainer) {
+          const n = 100;
+          const complexities = [
+            { name: 'O(1)', value: 1, color: '#10b981' },
+            { name: 'O(log n)', value: Math.log2(n), color: '#22c55e' },
+            { name: 'O(n)', value: n, color: '#3b82f6' },
+            { name: 'O(n log n)', value: n * Math.log2(n), color: '#f59e0b' },
+            { name: 'O(n²)', value: n * n, color: '#ef4444' }
+          ];
+          
+          const maxValue = complexities[complexities.length - 1].value;
+          
+          scalingContainer.innerHTML = `
+            <div class="scaling-preview" style="background: transparent;">
+              <div class="scaling-bars">
+                ${complexities.map(c => {
+                  const width = Math.max(2, (c.value / maxValue) * 100);
+                  const label = c.value >= 1000 ? `${(c.value/1000).toFixed(1)}K` : c.value.toFixed(0);
+                  return `
+                    <div class="scaling-row">
+                      <span class="label" style="width: 80px;">${c.name}</span>
+                      <div class="bar" style="width: ${width}%; background: ${c.color};">
+                        <span>${label} ops</span>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+              <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+                Relative operations for n = ${n} elements
+              </p>
+            </div>
+          `;
+        }
+        
+        // Run comparison button
+        const runBtn = document.getElementById('run-comparison');
+        if (runBtn) {
+          runBtn.addEventListener('click', () => {
+            const checkboxes = document.querySelectorAll('#algo-selector input:checked');
+            const algorithms = Array.from(checkboxes).map(cb => cb.value);
+            
+            if (algorithms.length === 0) {
+              alert('Please select at least one algorithm.');
+              return;
+            }
+            
+            const sizesInput = document.getElementById('compare-sizes');
+            const sizes = sizesInput.value
+              .split(',')
+              .map(s => parseInt(s.trim()))
+              .filter(n => !isNaN(n) && n > 0 && n <= 10000);
+            
+            if (sizes.length === 0) {
+              alert('Please enter valid array sizes (max 10,000).');
+              return;
+            }
+            
+            // Show loading
+            const chartContainer = document.getElementById('comparison-chart');
+            chartContainer.innerHTML = '<h4>Runtime Comparison</h4><p style="text-align: center; padding: 2rem;">Running benchmarks...</p>';
+            
+            runBtn.disabled = true;
+            runBtn.textContent = 'Running...';
+            
+            // Run benchmark async
+            setTimeout(() => {
+              const chartHTML = createComparisonChart(algorithms, sizes);
+              chartContainer.innerHTML = '<h4>Runtime Comparison</h4>' + chartHTML;
+              
+              runBtn.disabled = false;
+              runBtn.textContent = 'Run Comparison';
+            }, 100);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
+
