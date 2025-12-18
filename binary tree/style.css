@@ -310,6 +310,7 @@ a {
 
 .panel {
   width: 100%;
+  -ms-flex-item-align: auto;
   background: var(--bg-panel);
   border-radius: 18px;
   padding: 1.75rem;
@@ -1384,6 +1385,15 @@ svg.tree-svg {
     grid-column: span 2;
   }
 }
+
+/* Ensure side panels (Big-O + recommendations) visually align
+   with the top complexity overview and performance benchmark */
+.compare-grid .panel {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
 
 /* Algorithm selector checkboxes */
 .algo-selector {
