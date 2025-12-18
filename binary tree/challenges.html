@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Challenges | Algo Playground</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%234338ca%22 rx=%2215%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22monospace%22>&lt;/&gt;</text></svg>" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-nav">
+      <a class="site-nav__brand" href="index.html">Algo Playground</a>
+      <nav class="site-nav__links">
+        <a href="index.html">Home</a>
+        <a href="searching.html">Searching</a>
+        <a href="sorting.html">Sorting</a>
+        <a href="treebuilder.html">Tree Builder</a>
+        <a href="graph.html">Graphs</a>
+        <a href="challenges.html" class="active">Challenges</a>
+        <a href="playground.html">Playground</a>
+      </nav>
+    </header>
+
+    <header class="hero hero--tight">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Interactive Challenges</p>
+        <h1>Test Your Algorithm Intuition</h1>
+        <p class="hero__subtitle">
+          Guess the next step of an algorithm, answer quick quizzes, and climb the local leaderboard.
+        </p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="panel full-width">
+        <div class="panel__header">
+          <h2>🎮 Guess the Next Step</h2>
+          <p>
+            We show you a current state of a sorting algorithm. Can you predict what happens next?
+          </p>
+        </div>
+
+        <div class="order-form__grid">
+          <div class="field">
+            <span>Algorithm</span>
+            <select id="challenge-algorithm">
+              <option value="bubble">Bubble Sort</option>
+              <option value="quick">Quick Sort</option>
+              <option value="selection">Selection Sort</option>
+              <option value="merge">Merge Sort</option>
+              <option value="heap">Heap Sort</option>
+            </select>
+          </div>
+          <div class="field">
+            <span>Array size</span>
+            <input
+              id="challenge-size"
+              type="number"
+              min="4"
+              max="9"
+              value="6"
+            />
+          </div>
+        </div>
+
+        <div class="order-form__actions" style="margin-top: 1rem;">
+          <button type="button" id="new-challenge-btn">New Puzzle</button>
+          <button type="button" id="reveal-step-btn" class="ghost">
+            Reveal Answer
+          </button>
+        </div>
+
+        <div id="challenge-status" class="status-message" role="status"></div>
+
+        <div class="visualizer-container" style="margin-top: 1.25rem;">
+          <div class="visualizer-header">
+            <h3>Current State</h3>
+            <div class="visualizer-step-info">
+              <span class="step-counter">
+                Step <span id="challenge-step-index">0</span> of
+                <span id="challenge-step-total">0</span>
+              </span>
+            </div>
+          </div>
+          <div
+            class="visualizer-canvas"
+            id="challenge-canvas"
+            aria-label="Array state for the current puzzle"
+          ></div>
+          <div class="visualizer-description">
+            <p id="challenge-description">
+              Click "New Puzzle" to generate a challenge.
+            </p>
+          </div>
+        </div>
+
+        <section class="panel dual-panel" style="margin-top: 1.5rem;">
+          <div class="panel__header">
+            <h2>What happens next?</h2>
+            <p>Pick the action that correctly describes the next step.</p>
+          </div>
+          <div id="challenge-options" class="feature-panel__body">
+            <!-- Options populated by JS -->
+          </div>
+        </section>
+      </section>
+
+      <section class="panel">
+        <div class="panel__header">
+          <h2>🧠 Quick Quizzes</h2>
+          <p>Answer conceptual questions about traversals and sorting outcomes.</p>
+        </div>
+        <div class="feature-panel__body">
+          <p id="quiz-question" style="font-weight: 600;"></p>
+          <div id="quiz-options" class="feature-panel__body" style="margin-top: 0.75rem;">
+            <!-- Quiz options injected by JS -->
+          </div>
+          <div class="order-form__actions" style="margin-top: 1rem;">
+            <button type="button" id="next-quiz-btn">Next Question</button>
+          </div>
+          <p id="quiz-status" class="order-form__hint"></p>
+          <div class="result-card small" style="margin-top: 1rem;">
+            <div class="result-grid">
+              <div>
+                <strong>Current streak</strong>
+                <p id="quiz-streak">0</p>
+              </div>
+              <div>
+                <strong>Best streak</strong>
+                <p id="quiz-best-streak">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel__header">
+          <h2>🏅 Local Leaderboard</h2>
+          <p>Scores are saved in your browser only.</p>
+        </div>
+        <div class="feature-panel__body">
+          <div class="result-card small">
+            <h3>Top Challenge Scores</h3>
+            <ol id="leaderboard-list" class="list-steps">
+              <li class="placeholder">
+                Solve challenges to appear on the leaderboard.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Algo Playground • Practice algorithms with interactive challenges.</p>
+    </footer>
+
+    <script src="scripts/utilities.js" defer></script>
+    <script src="scripts/algorithm-visualizer.js" defer></script>
+    <script src="scripts/challenges.js" defer></script>
+  </body>
+</html>
+
+

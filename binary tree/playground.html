@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Playground | Algo Playground</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%234338ca%22 rx=%2215%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22monospace%22>&lt;/&gt;</text></svg>" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-nav">
+      <a class="site-nav__brand" href="index.html">Algo Playground</a>
+      <nav class="site-nav__links">
+        <a href="index.html">Home</a>
+        <a href="searching.html">Searching</a>
+        <a href="sorting.html">Sorting</a>
+        <a href="treebuilder.html">Tree Builder</a>
+        <a href="graph.html">Graphs</a>
+        <a href="challenges.html">Challenges</a>
+        <a href="playground.html" class="active">Playground</a>
+      </nav>
+    </header>
+
+    <header class="hero hero--tight">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Code Playground</p>
+        <h1>Write & Run Your Own Algorithms</h1>
+        <p class="hero__subtitle">
+          Experiment with JavaScript directly in the browser and compare your results
+          with built-in visualized algorithms.
+        </p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="panel full-width">
+        <div class="panel__header">
+          <h2>✏️ Your Code</h2>
+          <p>
+            Write a function that takes an array of numbers as <code>input</code> and
+            returns a new array. You can use <code>console.log</code> for debugging.
+          </p>
+        </div>
+
+        <div class="order-form__grid">
+          <div class="field">
+            <span>Language</span>
+            <select id="playground-language">
+              <option value="js">JavaScript (runs in browser)</option>
+              <option value="py" disabled>Python (view only)</option>
+            </select>
+          </div>
+          <div class="field">
+            <span>Input array</span>
+            <input
+              id="playground-input-array"
+              type="text"
+              placeholder="17, 4, 9, 2, 11, 6"
+            />
+          </div>
+          <div class="field">
+            <span>Reference algorithm</span>
+            <select id="playground-reference">
+              <option value="">None</option>
+              <option value="quick">Quick Sort</option>
+              <option value="merge">Merge Sort</option>
+              <option value="heap">Heap Sort</option>
+              <option value="bubble">Bubble Sort</option>
+              <option value="selection">Selection Sort</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="field" style="margin-top: 1rem;">
+          <span>Code</span>
+          <textarea
+            id="playground-code"
+            spellcheck="false"
+          >// Example: simple ascending sort using built-in sort
+function solve(input, console) {
+  // input is an array of numbers
+  const copy = [...input];
+  copy.sort((a, b) => a - b);
+  console.log('Sorted array:', copy);
+  return copy;
+}</textarea>
+        </label>
+
+        <div class="order-form__actions">
+          <button type="button" id="run-code-btn">Run Code</button>
+          <button type="button" id="compare-code-btn" class="ghost">
+            Compare with reference
+          </button>
+        </div>
+
+        <p class="order-form__hint">
+          Tip: The function must be named <code>solve</code> and accept
+          <code>(input, console)</code> as parameters.
+        </p>
+
+        <div id="playground-status" class="status-message" role="status"></div>
+
+        <div class="result-card" style="margin-top: 1.5rem;">
+          <h3>🧾 Output</h3>
+          <pre
+            id="playground-output"
+            style="margin-top: 0.5rem; max-height: 260px; overflow: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; white-space: pre-wrap;"
+          ></pre>
+        </div>
+
+        <div class="result-card small" style="margin-top: 1rem;">
+          <h3>📊 Comparison</h3>
+          <p id="playground-comparison-summary">
+            Select a reference algorithm and click "Compare with reference" to see if
+            your output matches.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Algo Playground • Experiment with your own implementations.</p>
+    </footer>
+
+    <script src="scripts/complexity-analyzer.js" defer></script>
+    <script src="scripts/sort-page.js" defer></script>
+    <script src="scripts/playground.js" defer></script>
+    <script src="scripts/utilities.js" defer></script>
+  </body>
+</html>
+
+
