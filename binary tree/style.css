@@ -183,6 +183,41 @@ a {
   color: var(--text-nav-hover);
 }
 
+.site-nav__links .user-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.site-nav__links .user-link {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+}
+
+.site-nav__links .user-link:hover {
+  background: var(--bg-nav-hover);
+  color: var(--text-nav-hover);
+}
+
+.site-nav__links .auth-link {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+}
+
+.site-nav__links .auth-link:hover {
+  background: var(--bg-nav-hover);
+  color: var(--text-nav-hover);
+}
+
 /* Theme Toggle Button */
 .theme-toggle {
   background: var(--bg-chip);

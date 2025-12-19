@@ -390,11 +390,26 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initUtilities();
     insertNavControls();
+    // Initialize auth navigation if auth-api.js is loaded
+    if (typeof auth !== 'undefined') {
+      auth.updateNavigation();
+    }
   });
 } else {
   initUtilities();
   insertNavControls();
+  // Initialize auth navigation if auth-api.js is loaded
+  if (typeof auth !== 'undefined') {
+    auth.updateNavigation();
+  }
 }
+
+// Update auth navigation when auth-api.js loads (if loaded after utilities.js)
+window.addEventListener('load', () => {
+  if (typeof auth !== 'undefined') {
+    auth.updateNavigation();
+  }
+});
 
 // Export for use in other scripts
 if (typeof module !== 'undefined' && module.exports) {

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Algo Playground</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%234338ca%22 rx=%2215%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22monospace%22>&lt;/&gt;</text></svg>" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="auth.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body data-page="auth">
+    <header class="site-nav">
+      <a class="site-nav__brand" href="index.html">Algo Playground</a>
+      <nav class="site-nav__links">
+        <a href="index.html">Home</a>
+        <a href="searching.html">Searching</a>
+        <a href="sorting.html">Sorting</a>
+        <a href="treebuilder.html">Tree Builder</a>
+        <a href="graph.html">Graphs</a>
+      </nav>
+    </header>
+
+    <main class="auth-container">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h1>Welcome Back</h1>
+          <p>Sign in to access your algorithm history and saved progress</p>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <div class="field">
+            <label for="login-email">Email</label>
+            <input
+              type="email"
+              id="login-email"
+              name="email"
+              placeholder="your.email@example.com"
+              required
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="field">
+            <label for="login-password">Password</label>
+            <input
+              type="password"
+              id="login-password"
+              name="password"
+              placeholder="Enter your password"
+              required
+              autocomplete="current-password"
+            />
+          </div>
+
+          <div class="auth-options">
+            <label class="checkbox-label">
+              <input type="checkbox" id="remember-me" />
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="forgot-link" id="forgot-password-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="auth-button primary">
+            Sign In
+          </button>
+
+          <div id="login-status" class="status-message" role="status"></div>
+        </form>
+
+        <div class="auth-divider">
+          <span>or</span>
+        </div>
+
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="register.html">Sign up</a></p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>Algo Playground • Your algorithm learning companion</p>
+    </footer>
+
+    <script src="scripts/api-config.js" defer></script>
+    <script src="scripts/auth-api.js" defer></script>
+    <script src="scripts/login-handler.js" defer></script>
+    <script src="scripts/utilities.js" defer></script>
+  </body>
+</html>
+

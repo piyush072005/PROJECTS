@@ -101,6 +101,20 @@ function handleInsert() {
   const lastOp = bTree.operationHistory[bTree.operationHistory.length - 1];
   addToHistory(lastOp);
 
+  // Track history if user is logged in
+  if (typeof auth !== 'undefined') {
+    auth.isAuthenticated().then(isAuth => {
+      if (isAuth) {
+        auth.addHistoryEntry('tree', {
+          treeType: 'B-Tree',
+          operation: 'insert',
+          value: value,
+          order: bTree.order
+        });
+      }
+    });
+  }
+
   updateDisplay();
   updateStatus(`Inserted ${value}`, 'success');
 

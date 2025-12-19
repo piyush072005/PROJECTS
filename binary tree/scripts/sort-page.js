@@ -68,6 +68,22 @@ if (sortForm && sortAlgorithms[algorithmKey]) {
     populateSteps(steps);
     showSortStatus('Sort completed successfully.', false);
     
+    // Track history if user is logged in
+    if (typeof auth !== 'undefined') {
+      auth.isAuthenticated().then(isAuth => {
+        if (isAuth) {
+          auth.addHistoryEntry('sort', {
+            algorithm: algorithmKey,
+            arrayLength: dataset.length,
+            input: dataset.slice(0, 20), // Store first 20 elements
+            comparisons: comparisons,
+            swaps: swaps,
+            sorted: sorted.slice(0, 20)
+          });
+        }
+      });
+    }
+    
     // Generate and display animation frames
     if (visualizer && sortAlgorithms[algorithmKey].generateFrames) {
       const frameGenerator = sortAlgorithms[algorithmKey].generateFrames();

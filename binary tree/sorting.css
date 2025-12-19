@@ -1,0 +1,209 @@
+/* Sorting Pages Styles - Centered Layout */
+
+/* Center the main content on all sorting pages */
+body[data-algorithm] .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+  gap: 1.5rem;
+}
+
+/* Center all panels */
+body[data-algorithm] .panel {
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Center form elements */
+body[data-algorithm] .order-form {
+  width: 100%;
+}
+
+body[data-algorithm] .order-form__header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+body[data-algorithm] .order-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+body[data-algorithm] .order-form__hint {
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+/* Center field inputs */
+body[data-algorithm] .field {
+  width: 100%;
+}
+
+body[data-algorithm] .field textarea {
+  width: 100%;
+  min-height: 110px;
+  border-radius: 12px;
+  border: 1px solid var(--border-input);
+  padding: 0.75rem 1rem;
+  resize: vertical;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  background: var(--bg-input);
+  color: var(--text-primary);
+}
+
+body[data-algorithm] .field textarea:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--border-focus-ring);
+  background: var(--bg-input-focus);
+}
+
+/* Center status message */
+body[data-algorithm] .status-message {
+  margin-top: 1.5rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: var(--bg-status);
+  color: var(--text-status);
+  font-weight: 500;
+  display: none;
+  transition: background 0.3s ease, color 0.3s ease;
+  text-align: center;
+}
+
+body[data-algorithm] .status-message.visible {
+  display: block;
+}
+
+body[data-algorithm] .status-message.error {
+  background: var(--bg-status-error);
+  color: var(--text-error);
+}
+
+/* Center result cards */
+body[data-algorithm] .result-card {
+  margin-top: 1.25rem;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  transition: background 0.3s ease, border-color 0.3s ease;
+  width: 100%;
+}
+
+body[data-algorithm] .result-card h3 {
+  text-align: center;
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+
+body[data-algorithm] .result-card p {
+  text-align: center;
+  font-weight: 500;
+  color: var(--text-result);
+}
+
+body[data-algorithm] .result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Center visualizer panel */
+body[data-algorithm] .panel.visual-panel {
+  width: 100%;
+  max-width: 1000px;
+}
+
+body[data-algorithm] .visualizer-container {
+  width: 100%;
+}
+
+/* Center step-by-step panel */
+body[data-algorithm] .panel.dual-panel {
+  width: 100%;
+  max-width: 1000px;
+}
+
+body[data-algorithm] .panel__header {
+  text-align: center;
+}
+
+body[data-algorithm] .list-steps {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+body[data-algorithm] .list-steps .placeholder {
+  text-align: center;
+  color: var(--text-placeholder);
+  font-style: italic;
+  list-style: none;
+  padding-left: 0;
+}
+
+/* Center sorting.html page specifically (no data-algorithm attribute) */
+body:not([data-algorithm]) .main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 20vh;
+}
+
+body:not([data-algorithm]) .panel.feature-panel {
+  max-width: 800px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+body:not([data-algorithm]) .feature-panel__body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+/* Ensure visualizer container is centered */
+body[data-algorithm] .visualizer-container {
+  margin-top: 1.5rem;
+  border-radius: 16px;
+  background: var(--bg-visual);
+  border: 1px solid var(--border-card);
+  overflow: hidden;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body[data-algorithm] .panel {
+    max-width: 100%;
+    padding: 1.25rem;
+  }
+  
+  body[data-algorithm] .order-form__actions {
+    flex-direction: column;
+  }
+  
+  body[data-algorithm] .order-form__actions button {
+    width: 100%;
+  }
+  
+  body[data-algorithm] .result-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

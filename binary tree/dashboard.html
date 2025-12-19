@@ -3,21 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Algo Playground | Traversals, Sorting , Searching and Graphs</title>
+    <title>Dashboard | Algo Playground</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%234338ca%22 rx=%2215%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22monospace%22>&lt;/&gt;</text></svg>" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="dashboard.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body data-page="dashboard">
     <header class="site-nav">
       <a class="site-nav__brand" href="index.html">Algo Playground</a>
       <nav class="site-nav__links">
-        <a href="index.html" class="active">Home</a>
+        <a href="index.html">Home</a>
         <a href="searching.html">Searching</a>
         <a href="sorting.html">Sorting</a>
         <a href="treebuilder.html">Tree Builder</a>
@@ -27,39 +28,54 @@
       </nav>
     </header>
 
-    <header class="hero">
+    <header class="hero hero--tight">
       <div class="hero__content">
-        <p class="hero__eyebrow">Interactive Algorithms Suite</p>
-        <h1>Visualize Searching</h1>
+        <p class="hero__eyebrow">User Dashboard</p>
+        <h1>Your Algorithm History</h1>
         <p class="hero__subtitle">
-          Jump into any topic using the navigation bar or start from the cards
-          below. Every page offers inputs, visual feedback, and textual
-          explanations tailored to the algorithm.
+          Track your progress and review past algorithm visualizations and operations.
         </p>
       </div>
     </header>
 
-    <main class="main" style="display: flex; justify-content: center; align-items: center; min-height: 20vh;">
-      <section class="panel feature-panel" style="max-width: 800px; width: 100%; margin-top: 20px;">
+    <main class="main">
+      <section class="panel">
         <div class="panel__header">
-          <h2>Searching Studio</h2>
-          <p>See how linear and binary search traverse an array.</p>
+          <h2>👤 Profile Information</h2>
         </div>
-        <div class="feature-panel__body">
-          <a class="chip-link" href="binary-search.html">Binary Search</a>
-          <a class="chip-link" href="linear-search.html">Linear Search</a>
+        <div id="profile-info" class="profile-info">
+          <p>Loading...</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel__header">
+          <h2>📊 Activity Statistics</h2>
+        </div>
+        <div id="activity-stats" class="stats-grid">
+          <p>Loading...</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel__header">
+          <h2>📜 Recent History</h2>
+          <p>Your recent algorithm operations and visualizations</p>
+        </div>
+        <div id="history-list" class="history-container">
+          <p class="placeholder">No history yet. Start using algorithms to see your activity here!</p>
         </div>
       </section>
     </main>
 
-    
     <footer class="footer">
-      <p>Algo Playground • Built with vanilla HTML/CSS/JS.</p>
+      <p>Algo Playground • Track your learning journey</p>
     </footer>
 
     <script src="scripts/api-config.js" defer></script>
     <script src="scripts/auth-api.js" defer></script>
-    <script src="scripts/auth-guard.js" defer></script>
-    <script src="scripts/utilities.js"></script>
+    <script src="scripts/dashboard.js" defer></script>
+    <script src="scripts/utilities.js" defer></script>
   </body>
 </html>
+
