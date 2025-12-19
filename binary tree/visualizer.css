@@ -1,0 +1,333 @@
+/* Styles for the Algorithm Visualizer
+   USED ON: challenges.html (Guess the Next Step visualizer) */
+
+.visualizer-container {
+  margin-top: 1.5rem;
+  border-radius: 16px;
+  background: var(--bg-visual);
+  border: 1px solid var(--border-card);
+  overflow: hidden;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.visualizer-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-card);
+  background: var(--bg-panel);
+}
+
+.visualizer-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-heading);
+}
+
+.visualizer-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.visualizer-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: var(--bg-chip);
+  color: var(--text-chip);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.visualizer-controls button:hover {
+  background: var(--bg-chip-hover);
+}
+
+.visualizer-controls button:active {
+  transform: scale(0.95);
+}
+
+.visualizer-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.visualizer-controls button svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.visualizer-controls .speed-control {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--border-card);
+}
+
+.visualizer-controls .speed-control label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.visualizer-controls .speed-control input[type="range"] {
+  width: 80px;
+  accent-color: var(--text-accent);
+}
+
+.visualizer-step-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.visualizer-step-info .step-counter {
+  font-weight: 600;
+  color: var(--text-accent);
+}
+
+/* Array Bars Visualization */
+.visualizer-canvas {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  padding: 2rem 1.5rem;
+  min-height: 280px;
+}
+
+.array-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 40px;
+  flex: 1;
+  max-width: 80px;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(180deg, #6366f1, #4338ca);
+  transition: height 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  position: relative;
+}
+
+.array-bar .bar-value {
+  position: absolute;
+  top: -28px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.array-bar .bar-index {
+  position: absolute;
+  bottom: -24px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Bar States */
+.array-bar.comparing {
+  background: linear-gradient(180deg, #f59e0b, #d97706);
+  transform: scaleY(1.02);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+}
+
+.array-bar.swapping {
+  background: linear-gradient(180deg, #ef4444, #dc2626);
+  animation: swap-pulse 0.4s ease;
+}
+
+.array-bar.pivot {
+  background: linear-gradient(180deg, #10b981, #059669);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+.array-bar.sorted {
+  background: linear-gradient(180deg, #22c55e, #16a34a);
+}
+
+.array-bar.active-range {
+  opacity: 1;
+}
+
+.array-bar.inactive-range {
+  opacity: 0.3;
+}
+
+.array-bar.minimum {
+  background: linear-gradient(180deg, #8b5cf6, #7c3aed);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.array-bar.merging {
+  background: linear-gradient(180deg, #06b6d4, #0891b2);
+}
+
+@keyframes swap-pulse {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(1.15); }
+}
+
+/* Step Description */
+.visualizer-description {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border-card);
+  background: var(--bg-panel);
+}
+
+.visualizer-description p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  min-height: 1.5em;
+}
+
+.visualizer-description .action-type {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-right: 0.5rem;
+}
+
+.visualizer-description .action-type.compare {
+  background: rgba(245, 158, 11, 0.2);
+  color: #d97706;
+}
+
+.visualizer-description .action-type.swap {
+  background: rgba(239, 68, 68, 0.2);
+  color: #dc2626;
+}
+
+.visualizer-description .action-type.pivot {
+  background: rgba(16, 185, 129, 0.2);
+  color: #059669;
+}
+
+.visualizer-description .action-type.merge {
+  background: rgba(6, 182, 212, 0.2);
+  color: #0891b2;
+}
+
+.visualizer-description .action-type.done {
+  background: rgba(34, 197, 94, 0.2);
+  color: #16a34a;
+}
+
+/* Legend */
+.visualizer-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--border-card);
+  background: var(--bg-card);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.legend-color.default {
+  background: linear-gradient(180deg, #6366f1, #4338ca);
+}
+
+.legend-color.comparing {
+  background: linear-gradient(180deg, #f59e0b, #d97706);
+}
+
+.legend-color.swapping {
+  background: linear-gradient(180deg, #ef4444, #dc2626);
+}
+
+.legend-color.pivot {
+  background: linear-gradient(180deg, #10b981, #059669);
+}
+
+.legend-color.sorted {
+  background: linear-gradient(180deg, #22c55e, #16a34a);
+}
+
+/* Dark mode adjustments for visualizer */
+[data-theme="dark"] .array-bar {
+  background: linear-gradient(180deg, #818cf8, #6366f1);
+}
+
+[data-theme="dark"] .array-bar.comparing {
+  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+}
+
+[data-theme="dark"] .array-bar.swapping {
+  background: linear-gradient(180deg, #f87171, #ef4444);
+}
+
+[data-theme="dark"] .array-bar.pivot {
+  background: linear-gradient(180deg, #34d399, #10b981);
+}
+
+[data-theme="dark"] .array-bar.sorted {
+  background: linear-gradient(180deg, #4ade80, #22c55e);
+}
+
+[data-theme="dark"] .legend-color.default {
+  background: linear-gradient(180deg, #818cf8, #6366f1);
+}
+
+/* Responsive tweaks for visualizer */
+@media (max-width: 600px) {
+  .visualizer-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .visualizer-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .visualizer-canvas {
+    gap: 2px;
+    padding: 1.5rem 1rem;
+  }
+  
+  .array-bar {
+    min-width: 24px;
+  }
+  
+  .array-bar .bar-value {
+    font-size: 0.7rem;
+    top: -22px;
+  }
+  
+  .visualizer-legend {
+    gap: 0.5rem;
+  }
+}
+
+
+
