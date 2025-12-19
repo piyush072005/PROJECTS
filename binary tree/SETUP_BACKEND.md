@@ -132,3 +132,4 @@ The frontend has been updated to use the API:
 5. Deploy backend to hosting service (Heroku, Railway, Render, etc.)
 6. Update frontend `api-config.js` with production API URL
 
+
