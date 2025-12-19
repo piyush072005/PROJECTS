@@ -28,7 +28,7 @@ cp env.example .env
 # Edit .env file with your MongoDB connection string
 # MONGODB_URI=mongodb://localhost:27017/algo_playground
 # Or for Atlas:
-# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/algo_playground
+
 ```
 
 ### 3. Configure Environment Variables
