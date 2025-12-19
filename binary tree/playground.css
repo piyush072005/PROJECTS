@@ -1,0 +1,145 @@
+/* Playground Page Styles - Centered Layout */
+
+/* Center the main content on playground page */
+body[data-page="playground"] .main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+/* Center the panel */
+.panel.full-width {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Center form elements */
+.panel.full-width .order-form__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Center code textarea */
+.panel.full-width .field textarea {
+  width: 100%;
+  min-height: 200px;
+  border-radius: 12px;
+  border: 1px solid var(--border-input);
+  padding: 0.75rem 1rem;
+  resize: vertical;
+  font-size: 0.95rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.panel.full-width .field textarea:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--border-focus-ring);
+  background: var(--bg-input-focus);
+}
+
+/* Center action buttons */
+.panel.full-width .order-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+/* Center select and input fields */
+.panel.full-width .field select {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border-input);
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  transition: border 0.2s, background 0.2s;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.panel.full-width .field select:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--border-focus-ring);
+  background: var(--bg-input-focus);
+}
+
+.panel.full-width .field input[type="text"] {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border-input);
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  transition: border 0.2s, background 0.2s;
+  background: var(--bg-input);
+  color: var(--text-primary);
+}
+
+.panel.full-width .field input[type="text"]:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--border-focus-ring);
+  background: var(--bg-input-focus);
+}
+
+/* Center result cards */
+.panel.full-width .result-card {
+  width: 100%;
+  margin-top: 1.25rem;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* Center status message */
+.panel.full-width .status-message {
+  margin-top: 1.5rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: var(--bg-status);
+  color: var(--text-status);
+  font-weight: 500;
+  display: none;
+  transition: background 0.3s ease, color 0.3s ease;
+  text-align: center;
+}
+
+.panel.full-width .status-message.visible {
+  display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .panel.full-width {
+    max-width: 100%;
+    padding: 1.25rem;
+  }
+  
+  .panel.full-width .order-form__grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .panel.full-width .order-form__actions {
+    flex-direction: column;
+  }
+  
+  .panel.full-width .order-form__actions button {
+    width: 100%;
+  }
+}
+
