@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>B-Tree Visualizer | Algo Playground</title>    
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="b-tree.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+  </head>
+  <body data-page="b-tree">
+    <header class="site-nav">
+      <a class="site-nav__brand" href="index.html">Algo Playground</a>
+      <nav class="site-nav__links">
+        <a href="index.html" class="active">Home</a>
+        <a href="searching.html">Searching</a>
+        <a href="sorting.html">Sorting</a>
+        <a href="treebuilder.html">Tree Builder</a>
+        <a href="graph.html">Graphs</a> 
+      </nav>
+    </header>
+
+    <header class="hero hero--tight">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Multi-way Search Trees</p>
+        <h1>B-Tree Visualizer</h1>
+        <p class="hero__subtitle">
+          Insert, delete, and search values in a B-Tree. Configure the order and watch how nodes split and merge to maintain balance.
+        </p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="panel avl-shell">
+        <div class="b-tree-container">  
+          <div class="container">
+            <div class="order-control">
+              <label style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <span style="font-weight: 600; color: var(--text-field);">B-Tree Order:</span>
+                <input
+                  type="number"
+                  id="treeOrder"
+                  value="3"
+                  min="3"
+                  max="10"
+                  style="width: 80px; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--border-input); background: var(--bg-input); color: var(--text-primary); font-size: 1rem;"
+                />
+                <span style="color: var(--text-secondary); font-size: 0.9rem;">(Minimum: 3, Recommended: 3-7)</span>
+                <button id="setOrderBtn" style="padding: 0.6rem 1.2rem; border: none; border-radius: 8px; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; font-weight: 600; cursor: pointer; transition: transform 0.15s;">
+                  Set Order
+                </button>
+              </label>
+              <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: var(--text-muted);">
+                Order determines max keys per node (order - 1) and max children per node (order).
+              </p>
+            </div>
+
+            <div class="controls">
+              <div class="input-group">
+                <input
+                  type="number"
+                  id="nodeValue"
+                  placeholder="Enter a number"
+                  min="0"
+                  max="999"
+                />
+                <button id="insertBtn">Insert</button>
+                <button id="deleteBtn">Delete</button>
+                <button id="searchBtn">Search</button>
+              </div>
+
+              <div class="action-buttons">
+                <button id="undoBtn" disabled>Undo Last Operation</button>
+                <button id="clearBtn">Clear Tree</button>
+              </div>
+            </div>
+
+            <div class="info-panel">
+              <div class="info-item">
+                <span>Status:</span>
+                <span id="status">Ready</span>
+              </div>
+              <div class="info-item">
+                <span>Operations:</span>
+                <span id="operationCount">0</span>
+              </div>
+              <div class="info-item">
+                <span>Order:</span>
+                <span id="currentOrder">3</span>
+              </div>
+              <div class="info-item">
+                <span>Max Keys/Node:</span>
+                <span id="maxKeys">2</span>
+              </div>
+              <div class="info-item">
+                <span>Max Children/Node:</span>
+                <span id="maxChildren">3</span>
+              </div>
+            </div>
+
+            <div class="canvas-container">
+              <svg id="treeCanvas" width="100%" height="600" aria-label="B-Tree"></svg>
+            </div>
+
+            <div class="history-panel">
+              <h3>
+                Operation History <span class="help-text">(Click any item for details)</span>
+              </h3>
+              <div id="historyList"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Algo Playground • Experiment with multiple algorithms from the nav.</p>
+    </footer>
+
+    <script src="scripts/b-tree/b-tree.js" defer></script>
+    <script src="scripts/b-tree/visualizer.js" defer></script>
+    <script src="scripts/b-tree/app.js" defer></script>
+    <script src="scripts/utilities.js" defer></script>
+  </body>
+</html>
+
