@@ -39,8 +39,6 @@ Edit `backend/.env`:
 PORT=3000
 NODE_ENV=development
 MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your-super-secret-jwt-key-change-this
-JWT_EXPIRES_IN=7d
 FRONTEND_URL=http://localhost:5500
 ```
 
@@ -71,12 +69,6 @@ BASE_URL: 'https://your-api-domain.com/api'
 
 ## API Endpoints
 
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user  
-- `GET /api/auth/me` - Get current user (requires token)
-- `POST /api/auth/logout` - Logout user (requires token)
-
 ### History
 - `POST /api/history` - Add history entry (requires token)
 - `GET /api/history` - Get user history (requires token)
@@ -86,26 +78,9 @@ BASE_URL: 'https://your-api-domain.com/api'
 
 ## Testing the API
 
-### Test Registration
-```bash
-curl -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test User","email":"test@example.com","password":"password123"}'
-```
-
-### Test Login
-```bash
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com","password":"password123"}'
-```
-
 ## Frontend Integration
 
-The frontend has been updated to use the API:
-- `scripts/auth-api.js` - New API-based authentication
 - `scripts/api-config.js` - API configuration
-- All pages now use API calls instead of localStorage
 
 ## Troubleshooting
 
@@ -118,18 +93,13 @@ The frontend has been updated to use the API:
 - Update `FRONTEND_URL` in `.env` to match your frontend URL
 - Ensure backend CORS middleware is configured correctly
 
-### Token Issues
-- Check JWT_SECRET is set in `.env`
-- Verify token is being sent in Authorization header
-- Check token expiration time
 
 ## Production Deployment
 
 1. Set `NODE_ENV=production` in `.env`
-2. Use strong `JWT_SECRET` (generate random string)
-3. Update `FRONTEND_URL` to production domain
-4. Use MongoDB Atlas or managed MongoDB service
-5. Deploy backend to hosting service (Heroku, Railway, Render, etc.)
-6. Update frontend `api-config.js` with production API URL
+2. Update `FRONTEND_URL` to production domain
+3. Use MongoDB Atlas or managed MongoDB service
+4. Deploy backend to hosting service (Heroku, Railway, Render, etc.)
+5. Update frontend `api-config.js` with production API URL
 
 

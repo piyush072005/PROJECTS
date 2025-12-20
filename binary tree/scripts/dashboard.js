@@ -4,25 +4,20 @@
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
-  // Check if user is logged in
-  const isAuth = await auth.isAuthenticated();
-  if (!isAuth) {
-    window.location.href = 'login.html';
-    return;
-  }
+  // Anonymous-friendly dashboard: no redirects, show guest data
+  let user = null;
+  try {
+    if (typeof auth !== 'undefined' && auth.getCurrentUser) {
+      user = await auth.getCurrentUser();
+    }
+  } catch (_) {}
 
-  const user = await auth.getCurrentUser();
-  if (!user) {
-    window.location.href = 'login.html';
-    return;
-  }
-
-  // Load and display profile
+  // Load and display profile (falls back to guest)
   displayProfile(user);
-  
+
   // Load and display statistics
   await displayStatistics();
-  
+
   // Load and display history
   await displayHistory();
 });
@@ -31,17 +26,20 @@ function displayProfile(user) {
   const profileDiv = document.getElementById('profile-info');
   if (!profileDiv) return;
 
-  const createdAt = new Date(user.createdAt);
-  const lastLogin = user.lastLogin ? new Date(user.lastLogin) : null;
+  const isGuest = !user;
+  const createdAt = user && user.createdAt ? new Date(user.createdAt) : new Date();
+  const lastLogin = user && user.lastLogin ? new Date(user.lastLogin) : null;
+  const name = isGuest ? 'Guest' : escapeHtml(user.name);
+  const email = isGuest ? '—' : escapeHtml(user.email);
 
   profileDiv.innerHTML = `
     <div class="profile-item">
       <div class="label">Name</div>
-      <div class="value">${escapeHtml(user.name)}</div>
+      <div class="value">${name}</div>
     </div>
     <div class="profile-item">
       <div class="label">Email</div>
-      <div class="value">${escapeHtml(user.email)}</div>
+      <div class="value">${email}</div>
     </div>
     <div class="profile-item">
       <div class="label">Member Since</div>

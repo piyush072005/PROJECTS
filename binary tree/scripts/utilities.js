@@ -5,6 +5,18 @@
  * - Mobile Touch Support
  */
 
+// Lightweight auth shim to keep app functional without auth
+if (typeof window !== 'undefined' && typeof window.auth === 'undefined') {
+  window.auth = {
+    isAuthenticated: async () => false,
+    getCurrentUser: async () => null,
+    getUserStats: async () => ({ totalOperations: 0, uniqueAlgorithms: 0, todayOperations: 0 }),
+    getUserHistory: async () => [],
+    addHistoryEntry: async () => ({ success: true }),
+    updateNavigation: () => {}
+  };
+}
+
 // =============================================
 // DARK MODE
 // =============================================
@@ -390,26 +402,12 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initUtilities();
     insertNavControls();
-    // Initialize auth navigation if auth-api.js is loaded
-    if (typeof auth !== 'undefined') {
-      auth.updateNavigation();
-    }
   });
 } else {
   initUtilities();
   insertNavControls();
-  // Initialize auth navigation if auth-api.js is loaded
-  if (typeof auth !== 'undefined') {
-    auth.updateNavigation();
-  }
 }
 
-// Update auth navigation when auth-api.js loads (if loaded after utilities.js)
-window.addEventListener('load', () => {
-  if (typeof auth !== 'undefined') {
-    auth.updateNavigation();
-  }
-});
 
 // Export for use in other scripts
 if (typeof module !== 'undefined' && module.exports) {
