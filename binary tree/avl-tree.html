@@ -41,10 +41,10 @@
     <main class="main">
       <section class="panel avl-shell">
         <div class="avl-page">  
-          <div class="container">
+          <div class="container" style="background-color: #1E293b;">
 
-            <div class="controls">
-              <div class="input-group">
+            <div class="controls" style="background-color: #222f44;">
+              <div class="input-group" style="background-color: #28354b;">
                 <input
                   type="number"
                   id="nodeValue"
@@ -52,10 +52,10 @@
                   min="0"
                   max="999"
                 />
-                <button id="insertBtn">Insert</button>
-                <button id="deleteBtn">Delete</button>
-                <button id="findBtn">Find</button>
-                <button id="replaceBtn">Replace</button>
+                <button id="insertBtn" style="background-color: #0e7725;">Insert</button>
+                <button id="deleteBtn" style="background-color: #9e2424;">Delete</button>
+                <button id="findBtn" style="background-color: #2a6399;">Find</button>
+                <button id="replaceBtn" style="background-color: #cabe15;">Replace</button>
               </div>
 
               <div class="replace-group" id="replaceGroup" style="display: none">
@@ -76,7 +76,7 @@
               </div>
             </div>
 
-            <div class="info-panel">
+            <div class="info-panel" style="background-color: #1E293b;">
               <div class="info-item">
                 <span>Status:</span>
                 <span id="status">Ready</span>
@@ -87,11 +87,11 @@
               </div>
             </div>
 
-            <div class="canvas-container">
+            <div class="canvas-container" style="background-color: #192231;">
               <svg id="treeCanvas" width="100%" height="600" aria-label="AVL Tree"></svg>
             </div>
 
-            <div class="history-panel">
+            <div class="history-panel" style="background-color: #283242;">
               <h3>
                 Operation History <span class="help-text">(Click any item for explanation)</span>
               </h3>
